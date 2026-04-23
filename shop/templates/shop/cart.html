@@ -1,0 +1,104 @@
+{% extends "shop/base.html" %}
+
+{% block content %}
+
+<h1 style="margin-bottom:20px;">🛒 Your Cart</h1>
+
+<style>
+  .cart {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffff;
+    padding: 12px 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  }
+
+  .name {
+    font-weight: bold;
+  }
+
+  .qty {
+    color: #64748b;
+    font-size: 14px;
+  }
+
+  .price {
+    font-weight: bold;
+    color: #16a34a;
+  }
+
+  .summary {
+    margin-top: 20px;
+    padding: 15px;
+    background: #0f172a;
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 12px 18px;
+    background: #22c55e;
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: 0.2s;
+  }
+
+  .btn:hover {
+    background: #16a34a;
+    color: white;
+  }
+
+  .empty {
+    color: #94a3b8;
+    margin-top: 20px;
+  }
+</style>
+
+{% if cart_items %}
+
+<div class="cart">
+
+  {% for item in cart_items %}
+    <div class="item">
+      <div>
+        <div class="name">{{ item.product.name }}</div>
+        <div class="qty">Qty: {{ item.qty }}</div>
+      </div>
+
+      <div class="price">
+        KES {{ item.subtotal }}
+      </div>
+    </div>
+  {% endfor %}
+
+</div>
+
+<div class="summary">
+  <span>Total</span>
+  <strong>KES {{ total }}</strong>
+</div>
+
+<a href="/checkout/" class="btn">Proceed to Checkout →</a>
+
+{% else %}
+
+<p class="empty">Your cart is empty. Go grab something 🔥</p>
+
+{% endif %}
+
+{% endblock %}

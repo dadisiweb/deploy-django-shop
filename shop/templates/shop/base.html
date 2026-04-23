@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dadisi Shop</title>
+  <style>
+    body {
+      font-family: Arial;
+      margin: 0;
+      background: #f7f7f7;
+    }
+
+    .nav {
+      background: #111;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav a {
+      color: white;
+      margin-right: 15px;
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="nav">
+    <div>
+      <a href="/">🏠 Shop</a>
+      <a href="/cart/">🛒 Cart</a>
+      <a href="/orders/">📦 Orders</a>
+    </div>
+
+    <div>
+      {% if user.is_authenticated %}
+        <a href="/accounts/logout/">Logout</a>
+      {% else %}
+        <a href="/accounts/login/">Login</a>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="container">
+    {% block content %}
+    {% endblock %}
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+{% extends "shop/base.html" %}
+
+{% block content %}
+
+<style>
+  .order {
+    background: #7d8695;
+    padding: 15px;
+    margin-bottom: 12px;
+    border-radius: 10px;
+  }
+
+  .item {
+    margin-left: 10px;
+    color: #cbd5e1;
+    font-size: 14px;
+  }
+
+  .badge {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+  }
+
+  .paid { background: #22c55e; color: black; }
+  .pending { background: #f59e0b; color: black; }
+</style>
+
+<h1>📦 My Orders</h1>
+
+{% for order in orders %}
+  <div class="order">
+    <strong>Order #{{ order.id }}</strong><br>
+    <small>{{ order.created_at }}</small>
+
+    <div style="margin-top:10px;">
+      {% for item in order.orderitem_set.all %}
+        <div class="item">
+          • {{ item.product.name }} × {{ item.quantity }}
+        </div>
+      {% endfor %}
+    </div>
+
+    {% if order.is_paid %}
+      <div class="badge paid">Paid</div>
+    {% else %}
+      <div class="badge pending">Pending</div>
+    {% endif %}
+  </div>
+{% empty %}
+  <p>No orders yet.</p>
+{% endfor %}
+
+{% endblock %}
