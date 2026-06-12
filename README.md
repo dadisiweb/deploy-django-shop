@@ -129,3 +129,4 @@ gunicorn deploy_django_shop.wsgi:application --bind 0.0.0.0:8001
 
 **Dadisiweb Cloud**
 Deploy. Scale. Control.
+# django-shop
